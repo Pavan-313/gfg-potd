@@ -1,0 +1,19 @@
+class Solution {
+    public static int floor(Node root, int x) {
+        int fl = -1; // variable to store the floor value
+
+        while (root != null) { // loop until root is null
+            if (root.data == x) { // check if root value is equal to x
+                return root.data; // return the root value as it is the floor value
+            }
+
+            if (root.data < x) { // check if root value is less than x
+                fl = root.data; // update the floor value to root value
+                root = root.right; // move to the right child
+            } else {
+                root = root.left; // move to the left child
+            }
+        }
+        return fl; // return the floor value
+    }
+}
