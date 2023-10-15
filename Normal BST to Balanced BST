@@ -1,0 +1,52 @@
+class Solution {
+
+public:
+    // Your are required to complete this function
+    // function should return root of the modified BST
+
+    Node* balancedBST(Node* start, Node* end)
+    {
+        if (start == end || start == NULL) {
+            return NULL;
+        }
+
+        Node* slow = start;
+        Node* fast = start;
+        while (fast != end && fast->right != end) {
+            slow = slow->right;
+            fast = fast->right->right;
+        }
+
+        slow->left = balancedBST(start, slow);
+        slow->right = balancedBST(slow->right, end);
+
+        return slow;
+    }
+
+    Node* createDLL(Node* root, Node* prev)
+    {
+
+        if (root->left != NULL) {
+            prev = createDLL(root->left, prev);
+        }
+
+        prev->right = root;
+        root->left = prev;
+        prev = root;
+
+        if (root->right != NULL) {
+            prev = createDLL(root->right, prev);
+        }
+        return prev;
+    }
+
+    Node* buildBalancedTree(Node* root)
+    {
+        // Code here
+
+        Node* prev = new Node(-1);
+        createDLL(root, prev);
+
+        return balancedBST(prev->right, NULL);
+    }
+};
