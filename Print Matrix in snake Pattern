@@ -1,0 +1,30 @@
+class Solution
+{
+    //Function to return list of integers visited in snake pattern in matrix.
+    static ArrayList<Integer> snakePattern(int matrix[][])
+    {
+        int n = matrix.length;
+        ArrayList<Integer> output = new ArrayList<Integer>();
+        
+        //traversing over the rows.
+        for(int i = 0; i < n; i++)
+        {
+            //if current row is even, we add the elements 
+            //in the list from left to right.
+            if(i % 2 == 0)
+            {
+                for(int j = 0; j < n; j++)
+                    output.add(matrix[i][j]);
+            }
+            //else current row is odd and we add the elements 
+            //in the list from right to left.
+            else
+            {
+                for(int j = n-1; j >= 0; j--)
+                    output.add(matrix[i][j]);
+            }
+        }
+        //returning the list.
+        return output;
+    }
+}
